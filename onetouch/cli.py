@@ -11,7 +11,9 @@ def main():
     sms.add_argument('to', type=int)
     sms.add_argument('text')
     args = parser.parse_args()
-    if args.action == "sms":
+    if args.action is None:
+        parser.print_help()
+    elif args.action == "sms":
         onetouch.send_sms(args.to, args.text, args.host)
 
 if __name__ == "__main__":
