@@ -1,7 +1,7 @@
 import argparse
 import json
 
-from . import onetouch
+from . import onetouch, __version__
 
 
 def main():
@@ -14,6 +14,9 @@ def main():
 
     status = action.add_parser("status")
     status.add_argument("fields", nargs="*")
+
+    action.add_parser("version")
+
     args = parser.parse_args()
     if args.action == "status" or args.action is None:
         status = onetouch.get_status(args.host)
@@ -26,6 +29,8 @@ def main():
             print(json.dumps(dict(out)))
     elif args.action == "sms":
         onetouch.send_sms(args.to, args.message, args.host)
+    elif args.action == "version":
+        print("Alcatel OneTouch Utils version {}".format(__version__))
 
 if __name__ == "__main__":
     main()
