@@ -1,4 +1,5 @@
 import argparse
+import json
 
 from . import onetouch
 
@@ -10,9 +11,19 @@ def main():
     sms = action.add_parser("sms", help="send/receive SMSs")
     sms.add_argument('to', type=int)
     sms.add_argument('message')
+
+    status = action.add_parser("status")
+    status.add_argument("fields", nargs="*")
     args = parser.parse_args()
-    if args.action is None:
-        parser.print_help()
+    if args.action == "status" or args.action is None:
+        status = onetouch.get_status(args.host)
+        if len(args.fields) == 0:
+            print(json.dumps(status))
+        elif len(args.fields) == 1:
+            print(status[args.fields[0]])
+        else:
+            out = [(field, status[field]) for field in args.fields]
+            print(json.dumps(dict(out)))
     elif args.action == "sms":
         onetouch.send_sms(args.to, args.message, args.host)
 
