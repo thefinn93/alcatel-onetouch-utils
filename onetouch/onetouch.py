@@ -4,11 +4,11 @@ import requests
 HOST = "192.168.1.1"
 
 
-def send_sms(to, text, host=HOST):
+def send_sms(to, message, host=HOST):
     data = {
         "sms_number": to,
-        "sms_content": text,
+        "sms_content": message,
         "sms_id": "NaN",
         "action_type": "new"
     }
-    requests.post("http://{}/goform/sendSMS".format(HOST), data=data)
+    requests.post("http://{}/goform/sendSMS".format(host), data=data)

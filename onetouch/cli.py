@@ -9,12 +9,12 @@ def main():
     action = parser.add_subparsers(dest="action", help='The action to take')
     sms = action.add_parser("sms", help="send/receive SMSs")
     sms.add_argument('to', type=int)
-    sms.add_argument('text')
+    sms.add_argument('message')
     args = parser.parse_args()
     if args.action is None:
         parser.print_help()
     elif args.action == "sms":
-        onetouch.send_sms(args.to, args.text, args.host)
+        onetouch.send_sms(args.to, args.message, args.host)
 
 if __name__ == "__main__":
     main()
