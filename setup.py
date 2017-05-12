@@ -2,7 +2,7 @@
 from distutils.core import setup
 
 setup(name='alcatel-onetouch-utils',
-      version='0.1.0',
+      version='0.2.0',
       description='Utilities for interacting with Alcatel OneTouch devices',
       author='Finn Herzfeld',
       author_email='finn@finn.io',
