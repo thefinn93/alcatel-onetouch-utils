@@ -17,7 +17,7 @@ def main():
     args = parser.parse_args()
     if args.action == "status" or args.action is None:
         status = onetouch.get_status(args.host)
-        if len(args.fields) == 0:
+        if not hasattr(args, 'fields') or len(args.fields) == 0:
             print(json.dumps(status))
         elif len(args.fields) == 1:
             print(status[args.fields[0]])
